@@ -1,0 +1,6 @@
+[submodule "dependencies/pdffigures"]
+	path = dependencies/pdffigures
+	url = https://github.com/allenai/pdffigures
+[submodule "dependencies/export_fig"]
+	path = dependencies/export_fig
+	url = https://github.com/altmany/export_fig
