@@ -3,7 +3,7 @@ conf = setConf();
 % Extract figures from PDFs
 pdfs = arrayfun(@(f) f.name, dir(fullfile(conf.pdfPath, '*.pdf')), 'UniformOutput', false);
 
-figureNames = extract_figures(pdfs, conf);
+figureNames = extractFigures(pdfs, conf);
 
 % Extract subfigures
 if conf.extractSubfigures

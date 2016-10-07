@@ -1,4 +1,4 @@
-function figureNames = extract_figures(pdfs, conf)
+function figureNames = extractFigures(pdfs, conf)
 
 % Extract figures
 figureNames = {};
@@ -21,7 +21,7 @@ for p = pdfs
         figureNames = [figureNames {figureName}];
         scaleFactor = conf.dpi/extraction.DPI;
         imageBox = scaleBox(convertBox(extraction.ImageBB), scaleFactor);
-        figureImage = rasterize_figure(pdf, extraction.Page, imageBox, conf.dpi, conf.pageImagePath);
+        figureImage = rasterizeFigure(pdf, extraction.Page, imageBox, conf.dpi, conf.pageImagePath);
         imwrite(figureImage, fullfile(conf.figureImagePath, [figureName '.png']));
         textBoxes = cellfun(@(x) convertTextBox(x, scaleFactor, imageBox) ,extraction.ImageText);
         % Filter text boxes containing only whitespace

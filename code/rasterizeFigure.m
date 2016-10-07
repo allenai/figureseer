@@ -1,4 +1,4 @@
-function figureImage = rasterize_figure(pdfPath, page, box, dpi, savepath)
+function figureImage = rasterizeFigure(pdfPath, page, box, dpi, savepath)
 % Render the given figure as a raster (pixel) image.
 %
 % pdfPath is the path to the pdf
@@ -18,8 +18,6 @@ if exist(imfile, 'file') ~= 2
     '-dSAFER ' ... % disable interactivity
     '-sDEVICE=png16m '...
     '-dFirstPage=' page ' -dLastPage=' page ' -r' num2str(dpi) ' '...
-    ...%'-dTextAlphaBits=' num2str(aasubsamples) ' ' ... % text subsamples per pixel (antialiasing)
-    ...%'-dGraphicsAlphaBits=' num2str(aasubsamples) ' ' ... % vector graphics subsamples per pixel (antialiasing)
     '-o' imfile ' '...
     pdfPath ' '...
     ];
@@ -27,13 +25,6 @@ if exist(imfile, 'file') ~= 2
     ghostscript(cmd);
 end
 pageImage = imread(imfile);
-
-% Rescale json data and crop the figure from the full rasterized page
-%width = size(pageim,2);
-%jsonBB = fig.ImageBB;
-%scaleFactor = exconf.dpi/fig.DPI;
-%imBB = [jsonBB(1), jsonBB(2), (jsonBB(3)-jsonBB(1)), (jsonBB(4)-jsonBB(2))]*scaleFactor;% * width;
-
 figureImage = imcrop(pageImage, box);
 end
 
