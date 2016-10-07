@@ -19,7 +19,6 @@ If you find FigureSeer useful in your research, please consider citing:
 
 1. Caffe and its Matlab interface (http://caffe.berkeleyvision.org/installation.html)
 2. JSONlab (https://www.mathworks.com/matlabcentral/fileexchange/33381-jsonlab--a-toolbox-to-encode-decode-json-files)
-3. 
 
 ### Requirements: Hardware
 
