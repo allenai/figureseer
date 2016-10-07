@@ -4,7 +4,7 @@
 
 1. Install JSONlab (https://www.mathworks.com/matlabcentral/fileexchange/33381-jsonlab--a-toolbox-to-encode-decode-json-files)
 2. Install Caffe and its Matlab interface (http://caffe.berkeleyvision.org/installation.html). In setConf.m, edit 'conf.caffeRoot'.
-3. Download the neural networks from s3://ai2-website/figureseer/neural-networks/ and save them to figureseer/data/neural-networks/
+3. Download the neural networks from s3://ai2-website/figureseer/neural-networks/ and save them to figureseer/data/models/neural-networks/
 4. Compile pdffigures (included in the dependencies directory)
 5. Run 'main.m'
 

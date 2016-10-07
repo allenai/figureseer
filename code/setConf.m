@@ -36,8 +36,13 @@ conf.resultJsonPath = fullfile(outputPath, 'result-jsons');
 [~,~] = mkdir(conf.resultPdfPath);
 [~,~] = mkdir(conf.resultJsonPath);
 
+% Models
+parsingModels = load(fullfile(dataPath, 'models', 'parsingModels'));
+conf.legendClassifier = parsingModels.legendClassifier;
+conf.tracingWeights = parsingModels.tracingWeights;
+
 % Neural networks
-nnPath = fullfile(dataPath, 'neural-networks');
+nnPath = fullfile(dataPath, 'models', 'neural-networks');
 conf.figureClassNet = fullfile(nnPath, 'figure_class_deploy.prototxt');
 conf.figureClassWeights = fullfile(nnPath, 'figure_class_snapshot_iter_450000.caffemodel');
 conf.figureClassMean = fullfile(nnPath, 'figure_class_mean.mat');

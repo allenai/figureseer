@@ -1,7 +1,4 @@
-function results = parseChart(fig)%, parsingModel, apprenticeshipWeights)
-
-parsingModels = load('~/Dropbox/ai2/figureAnalyzer/results/parsing/parsingModels.mat');
-apprenticeshipWeights = load('~/Dropbox/ai2/figureAnalyzer/code/cnnFeature/apprenticeshipWeights.mat');
+function results = parseChart(fig, legendClassifier, tracingWeights)
 
 % Check if we have text
 if isempty(fig.textBoxes)
@@ -18,7 +15,7 @@ catch
 end
 
 % Legend classification and symbol detection
-[legendEntries, cleanedFigureImage] = findLegend(fig, xAxis.textBoxIndices, yAxis.textBoxIndices, parsingModels.legendClassifier);
+[legendEntries, cleanedFigureImage] = findLegend(fig, xAxis.textBoxIndices, yAxis.textBoxIndices, legendClassifier);
 if isempty(legendEntries)
     results.error = 'Failed to find legend';
     return;
@@ -30,7 +27,7 @@ fig.image = cleanedFigureImage;
 [croppedImage, cropBounds] = cropPlotArea(fig, xAxis, yAxis);
 
 % Generate featuremaps, compute weighted sum, solve dynamic program
-traces = traceData(croppedImage, legendEntries, apprenticeshipWeights.featureWeightsTrainedOnA, cropBounds(2), cropBounds(1));
+traces = traceData(croppedImage, legendEntries, tracingWeights, cropBounds(2), cropBounds(1));
 
 % Plot results
 fontSize = 20;

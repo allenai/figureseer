@@ -42,7 +42,7 @@ for n = 1:length(figureNames)
     figureName = figureNames{n};
     fprintf('Parsing %s\n', figureName);
     fig = Figure.fromName(figureName, conf);
-    results = parseChart(fig);
+    results = parseChart(fig, conf.legendClassifier, conf.tracingWeights);
     if isfield(results, 'error')
         disp(results.error);
         continue;
