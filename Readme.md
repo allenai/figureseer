@@ -36,3 +36,7 @@ To run on your own PDFs, simply add them to figureseer/data/pdfs and run main.
 ### Data
 
 Data used for training models is available at the project webpage: http://allenai.org/plato/figureseer/.
+
+### License
+
+FigureSeer is released under the MIT License.
