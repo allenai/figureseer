@@ -42,15 +42,18 @@ for n = 1:length(figureNames)
     figureName = figureNames{n};
     fprintf('Parsing %s\n', figureName);
     fig = Figure.fromName(figureName, conf);
-    results = parseChart(fig, conf.legendClassifier, conf.tracingWeights);
-    if isfield(results, 'error')
-        disp(results.error);
+    result = parseChart(fig, conf);
+    if isfield(result, 'error')
+        disp(result.error);
         continue;
     end
+    result.xAxis = rmfield(struct(result.xAxis), 'model'); % Can't save matlab GLM type to Json
+    result.yAxis = rmfield(struct(result.yAxis), 'model');
+    savejson('', result, fullfile(conf.resultJsonPath, [figureName '.json']));
     export_fig(fullfile(conf.resultImagePath, [figureName '-result.png']),'-native');
 end
 
-% Output results
+% Output results PDFs
 for n = 1:length(pdfs)
     paperName = pdfs{n}(1:end-4);
     outputResultsPdf(paperName, conf);

@@ -37,7 +37,7 @@ if isempty(figureFiles)
     fclose(fid);
     return;
 end
-paperJson = loadjson(fullfile(conf.figureExtractionOutput, [paperName '.json'])); % TODO: Check
+paperJson = loadjson(fullfile(conf.figureExtractionOutput, [paperName '.json']));
 
 isFig = cellfun(@(js) strcmp(js.Type, 'Figure'), paperJson);
 figNums = cellfun(@(js) js.Number, paperJson);
@@ -69,7 +69,7 @@ idxToClass = containers.Map(keys,values);
 
 figureImages = dir(fullfile(conf.figureImagePath, sprintf('%s*.png',paperName)));
 figureNames = arrayfun(@(f) f.name(1:end-4), figureImages, 'UniformOutput', false);
-isSubfigure = @(filename) (length(filename) > 7) && strcmp(filename(end-7:end-2),'subfig'); %CHECK
+isSubfigure = @(filename) (length(filename) > 7) && strcmp(filename(end-7:end-2),'subfig');
 subfigures = cellfun(isSubfigure, figureNames);
 if conf.extractSubfigures
     figureNames = figureNames(subfigures);

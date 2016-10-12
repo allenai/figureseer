@@ -16,7 +16,6 @@
 % to move at all, there's no right boundary line.)
 
 function [croppedImage, cropBox] = cropPlotArea(fig, xAxis, yAxis)
-%try TODO: remove this try
 
 nonWhitePixelThreshold = .95;
 
@@ -101,16 +100,5 @@ while nonWhitePixels/(botAxisBound - topAxisBound) >= nonWhitePixelThreshold
     currentPixelColumn = fig.image(topAxisBound:botAxisBound, rightBound, :);
     nonWhitePixels = sum(sum(currentPixelColumn,3)~=3*255); % Count the number of non-white pixels, where white is [255 255 255]
 end
-% TODO: figure out errors
-% catch err
-%     disp(err);
-%     disp(err.stack(1));
-%     rethrow(err);
-%     %keyboard;
-%     leftBound = 1;
-%     topBound = 1;
-%     rightBound = size(fig.image,2);
-%     botBound = size(fig.image,1);
-% end
 cropBox = [leftBound, topBound, rightBound-leftBound, botBound-topBound];
 croppedImage = imcrop(fig.image, cropBox);

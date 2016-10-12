@@ -54,7 +54,6 @@ conf.extractSubfigures = true;
 conf.dpi = 200;
 
 % Setup
-%TODO: set mode
 addpath(conf.caffePath);
 if conf.useGPU
     caffe.set_mode_gpu;

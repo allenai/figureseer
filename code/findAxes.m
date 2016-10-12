@@ -1,19 +1,14 @@
-function [xAxis, yAxis, inAxes] = find_axes(fig)
-% Identify x and y axes by identifying axis ticks
-% TODO: change
-%on locations of text boxes containing
-% numbers, returning axis locations, the text boxes they consist of, and
+function [xAxis, yAxis, inAxes] = findAxes(fig)
+% Identify x and y axes by identifying axis ticks on locations of text
+% boxes containing  numbers, returning axis locations, the text boxes
+% they consist of, and
 % models of scale to convert from pixel coordinates on the fig image to
 % data coordinates.
 %
-% figim is the raster image of a figure.
-% figdata is a structure containing figure data, as produced by
-% loadfigdata.
-%
-% xmdl, ymdl are generalized linear models for mapping pixel coordinates
-% to chart data values, as determined by axis scale labels.
-% xaxisloc, yaxisloc are the row/column position of the x/y axes,
-% respectively.
+% fig is a Figure object.
+% xAxis and yAxis are axis objects corresponding to the two axes.
+% inAxis is a logical vector of which text boxes from fig are from the
+% axes (returned so they can be excluded during legend detection)
 
 % Only look at text that can be parsed as a number
 isNumeric = cellfun(@(tb) ~isnan(str2double(tb.text)), fig.textBoxes);

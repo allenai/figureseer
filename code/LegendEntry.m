@@ -8,7 +8,7 @@ classdef LegendEntry
     methods
         function l = LegendEntry(label, labelIndex, symbol)
             if nargin > 0
-                l.label = label; %TODO: make this consistent with axis titles
+                l.label = label;
                 l.labelIndex = labelIndex;
                 l.symbol = symbol;
             end

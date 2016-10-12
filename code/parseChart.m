@@ -1,4 +1,4 @@
-function results = parseChart(fig, legendClassifier, tracingWeights)
+function results = parseChart(fig, conf)
 
 % Check if we have text
 if isempty(fig.textBoxes)
@@ -15,7 +15,7 @@ catch
 end
 
 % Legend classification and symbol detection
-[legendEntries, cleanedFigureImage] = findLegend(fig, xAxis.textBoxIndices, yAxis.textBoxIndices, legendClassifier);
+[legendEntries, cleanedFigureImage] = findLegend(fig, xAxis.textBoxIndices, yAxis.textBoxIndices, conf.legendClassifier);
 if isempty(legendEntries)
     results.error = 'Failed to find legend';
     return;
@@ -27,7 +27,11 @@ fig.image = cleanedFigureImage;
 [croppedImage, cropBounds] = cropPlotArea(fig, xAxis, yAxis);
 
 % Generate featuremaps, compute weighted sum, solve dynamic program
-traces = traceData(croppedImage, legendEntries, tracingWeights, cropBounds(2), cropBounds(1));
+traces = traceData(croppedImage, legendEntries, cropBounds(2), cropBounds(1), conf);
+for n = 1:length(traces)
+    traces(n).xs = xAxis.model.predict(traces(n).pixelXs);
+    traces(n).ys = yAxis.model.predict(traces(n).pixelYs);
+end
 
 % Plot results
 fontSize = 20;
@@ -45,10 +49,22 @@ xMinBound = xAxis.min;
 xMaxBound = xAxis.max;
 yMinBound = yAxis.min;
 yMaxBound = yAxis.max;
+% Use linear or logarithmic axes
+xIsLog = strcmp(xAxis.modelType, 'log');
+yIsLog = strcmp(yAxis.modelType, 'log');
+if xIsLog && yIsLog
+    plotWithAxes = @loglog;
+elseif xIsLog
+    plotWithAxes = @semilogx;
+elseif yIsLog
+    plotWithAxes = @semilogy;
+else
+    plotWithAxes = @plot;
+end
 for trace = traces
     xs = xAxis.model.predict(trace.pixelXs);
     ys = yAxis.model.predict(trace.pixelYs);
-    plot(xs, ys, 'LineWidth', 5);
+    plotWithAxes(xs, ys, 'LineWidth', 5);
     % Someones we miss the true min or max tick, so set bounds that don't cut off any points
     xMinBound = min([xMinBound; xs(:)]);
     xMaxBound = max([xMaxBound; xs(:)]);
@@ -62,7 +78,7 @@ ylabel(yAxis.title.text);
 legendLabels = arrayfun(@(l) l.label, legendEntries, 'UniformOutput', false);
 legend(legendLabels);
 title('Reproduced');
-set(gca, 'fontsize', fontSize); %TODO: logarithmic scale
+set(gca, 'fontsize', fontSize);
 
 results.xAxis = xAxis;
 results.yAxis = yAxis;

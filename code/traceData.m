@@ -1,4 +1,4 @@
-function traces = traceData(figureImage, legend, weights, topOffset, leftOffset)
+function traces = traceData(figureImage, legend, topOffset, leftOffset, conf)
 
 vertexFeatures = {@pixelConvFeature, @connCompSizeFeature, @colorMatchFeature};
 nFeatures = length(vertexFeatures);
@@ -82,7 +82,7 @@ end
 
 vertexScores = curFigScores;
 traces(nSymbols) = Trace();
-featureWeights = weights;
+featureWeights = conf.tracingWeights;
 for symbolNum = 1:nSymbols
 
 % Predict paths using features trained by apprenticeship learning
@@ -99,8 +99,6 @@ end
 [curXs,curYs] = findCurvePath(scoreMatrix,breathingCost,slopeCost);
 pixelXs = curXs(:) + leftOffset - 1;
 pixelYs = curYs(:) + topOffset - 1;
-%xs = predict(xmdl.mdl,pixelXs);
-%ys = predict(ymdl.mdl,pixelYs);
 traces(symbolNum) = Trace(legend(symbolNum).label, [], [], pixelXs, pixelYs);
 
 end
