@@ -26,10 +26,11 @@ The default configuration for FigureSeer runs entirely on CPU. The CNN patch emb
 
 ### Installation
 
-1. Download the neural networks from s3://ai2-website/figureseer/neural-networks/ and save them to figureseer/data/models/neural-networks/
-2. Compile pdffigures (included in the dependencies directory)
-3. In setConf.m, edit 'conf.caffeRoot' to point to your Caffe installation.
-4. Run 'main.m'
+1. Clone the repo with `git clone --recursive https://github.com/allenai/figureseer`
+2. Download the neural networks from s3://ai2-website/figureseer/data/neural-networks/ and save them to figureseer/data/models/neural-networks/
+3. Compile pdffigures (included in the dependencies directory)
+4. In setConf.m, edit 'conf.caffeRoot' to point to your Caffe installation.
+5. Run 'main.m'
 
 To run on your own PDFs, simply add them to figureseer/data/pdfs and run main.
 
@@ -39,4 +40,4 @@ Data used for training models is available at the project webpage: http://allena
 
 ### License
 
-FigureSeer is released under the MIT License.
+FigureSeer is released under the GPLv2 License.
