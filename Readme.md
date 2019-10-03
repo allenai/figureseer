@@ -27,7 +27,7 @@ The default configuration for FigureSeer runs entirely on CPU. The CNN patch emb
 ### Installation
 
 1. Clone the repo with `git clone --recursive https://github.com/allenai/figureseer`
-2. Download model weights: from the FigureSeer root directory, run `aws s3 cp --recursive s3://ai2-website/data/figureseer/neural-networks/ data/models/neural-networks/`
+2. Download model weights from [https://drive.google.com/corp/drive/folders/18oQ6LZbxVTH7qgEY9tj7YdstdRpr0HV_](https://drive.google.com/corp/drive/folders/18oQ6LZbxVTH7qgEY9tj7YdstdRpr0HV_) and save them to `data/models/neural-networks/`.
 3. Compile pdffigures (included in the dependencies directory)
 4. In setConf.m, edit 'conf.caffeRoot' to point to your Caffe installation.
 5. Run 'main.m'
