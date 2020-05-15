@@ -1,5 +1,7 @@
 # FigureSeer: Parsing Result-Figures in Research Papers
 
+NB: FigureSeer is no longer being actively maintained. Code is provided for informational purposes only. If you're interested in taking over maintenance, please contact siegeln@uw.edu.
+
 ### Introduction
 
 FigureSeer is a system for parsing result-figures in research papers. It automatically localizes figures, classifies them, and analyses their content.
@@ -19,10 +21,6 @@ If you find FigureSeer useful in your research, please consider citing:
 
 1. Caffe and its Matlab interface (http://caffe.berkeleyvision.org/installation.html)
 2. JSONlab (https://www.mathworks.com/matlabcentral/fileexchange/33381-jsonlab--a-toolbox-to-encode-decode-json-files)
-
-### Requirements: Hardware
-
-The default configuration for FigureSeer runs entirely on CPU. The CNN patch embedding feature used for data tracing is computantionally expensive and is disabled by default. If running on a GPU, you can enable it by setting "conf.useGPU = true" and "conf.usePatchCnn = true" in setConf.m.
 
 ### Installation
 
